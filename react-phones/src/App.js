@@ -3,6 +3,31 @@ import Card from './components/Card';
 import Header from './components/Header';
 import CartBasket from './components/CartBasket';
 
+
+const arr = [
+  {
+    title: 'Apple iphone 11 Pro 256GB Space Gray' , 
+    price: 15890 , 
+    imageUrl: '/img/smartphones/Apple iPhone 11 Pro 256GB Space Gray.jpg',
+  },
+  {
+    title: 'Apple iphone 12 Green' ,
+    price: 13350,
+    imageUrl: '/img/smartphones/Apple iPhone 12 Green.jpg',
+    },            
+  {
+    title: 'Apple iphone 12 mini',
+    price: 13850,
+    imageUrl: '/img/smartphones/Apple iPhone 12 mini.jpg',
+  },
+  {
+    title: 'Apple iphone 12 Pro Max 256GB Graphite' , 
+    price: 18990 , 
+    imageUrl: '/img/smartphones/Apple iPhone 12 Pro Max 256GB Graphite.jpg',
+  },            
+];
+
+
 function App() { 
   return (
   <div className="wrapper clear"> 
@@ -20,9 +45,9 @@ function App() {
         </div>
 
       <div className="smartphones1 d-flex">
-      <Card />
-      <Card />
-      <Card />
+      {arr.map((obj) => (
+      <Card title={obj.title} price={obj.price} imageUrl={obj.imageUrl}/>
+      ))}
       </div>
        </div>
     </div>
