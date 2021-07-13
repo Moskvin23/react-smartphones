@@ -1,38 +1,24 @@
 
-function CartBasket() {
+function CartBasket({ onClose, items= [] }) {
 
     return (
-        <div style={{display: 'none'}} className="cart-basket-shadow">
+        <div className="cart-basket-shadow">
 
         <div className="cartBasket">
-      <h2 className="d-flex justify-between mb-30">Корзина<img className="removeBtn cu=p" src="/img/remove-btn.svg" alt="Remove"/></h2>
+      <h2 className="d-flex justify-between mb-30">
+        Корзина <img onClick={onClose} className="removeBtn cu=p" src="/img/remove-btn.svg" alt="Close"/></h2>
 
       <div className="items">
-      <div className="cartItem d-flex align-center">
-        <img className="mr-5" width={130} height={130} src="/img/smartphones/Apple iPhone 11 Pro 256GB Space Gray.jpg" alt="Smartphone"/>
+      {
+        items.map(obj=> <div className="cartItem d-flex align-center mb-20">
+        <img className="mr-5" width={130} height={130} src={obj.imageUrl} alt="Smartphone"/>
       <div>
-        <p className="mb-5">Apple iPhone 11 Pro 256GB Space Gray</p>
-        <b>Цена 15 898 грн.</b>
+      <p className="mb-5">{obj.title}</p>
+        <b>{obj.price} грн.</b>
       </div>
       <img className="removeBtn" src="/img/remove-btn.svg" alt="Remove"/>
-      </div>
-
-      <div className="cartItem d-flex align-center">
-        <img className="mr-5" width={130} height={130} src="/img/smartphones/Apple iPhone 11 Pro 256GB Space Gray.jpg" alt="Smartphone"/>
-      <div>
-        <p className="mb-5">Apple iPhone 11 Pro 256GB Space Gray</p>
-        <b>Цена 15 898 грн.</b>
-      </div>
-      <img className="removeBtn" src="/img/remove-btn.svg" alt="Remove"/>
-      </div>
-      <div className="cartItem d-flex align-center">
-        <img className="mr-5" width={130} height={130} src="/img/smartphones/Apple iPhone 11 Pro 256GB Space Gray.jpg" alt="Smartphone"/>
-      <div>
-        <p className="mb-5">Apple iPhone 11 Pro 256GB Space Gray</p>
-        <b>Цена 15 898 грн.</b>
-      </div>
-      <img className="removeBtn" src="/img/remove-btn.svg" alt="Remove"/>
-      </div>
+      </div>)
+      }
       </div>
 
       <div className="cartTotalBlock">

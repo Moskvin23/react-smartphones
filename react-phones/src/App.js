@@ -1,38 +1,33 @@
-
+import React from 'react';
 import Card from './components/Card';
 import Header from './components/Header';
 import CartBasket from './components/CartBasket';
 
 
-const arr = [
-  {
-    title: 'Apple iphone 11 Pro 256GB Space Gray' , 
-    price: 15890 , 
-    imageUrl: '/img/smartphones/Apple iPhone 11 Pro 256GB Space Gray.jpg',
-  },
-  {
-    title: 'Apple iphone 12 Green' ,
-    price: 13350,
-    imageUrl: '/img/smartphones/Apple iPhone 12 Green.jpg',
-    },            
-  {
-    title: 'Apple iphone 12 mini',
-    price: 13850,
-    imageUrl: '/img/smartphones/Apple iPhone 12 mini.jpg',
-  },
-  {
-    title: 'Apple iphone 12 Pro Max 256GB Graphite' , 
-    price: 18990 , 
-    imageUrl: '/img/smartphones/Apple iPhone 12 Pro Max 256GB Graphite.jpg',
-  },            
-];
-
-
 function App() { 
+  const [items, setItems] =React.useState([]);
+  const [cartItems, setCartItems] = React.useState([]);
+  
+  const [cartOpened, setCartOpened] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch('https://60e81695673e350017c217ba.mockapi.io/items')
+    .then((res)=>{
+      return res.json();
+    })
+    .then((json)=>{
+      setItems(json);
+    });
+  }, []);
+
+  const onAddToCart = (obj) => {
+    setCartItems(prev => [...prev, obj]);
+  }
+
   return (
   <div className="wrapper clear"> 
-    <CartBasket />
-    <Header />
+    {cartOpened && <CartBasket items={cartItems} onClose={()=> setCartOpened(false)}/>}
+    <Header onClickCart={()=> setCartOpened(true)} />
 
  
     <div className="content p-40">
@@ -44,9 +39,15 @@ function App() {
         </div>
         </div>
 
-      <div className="smartphones1 d-flex">
-      {arr.map((obj) => (
-      <Card title={obj.title} price={obj.price} imageUrl={obj.imageUrl}/>
+      <div className="smartphones1 d-flex flex-wrap">
+      {items.map((item) => (
+      <Card 
+      title={item.title} 
+      price={item.price} 
+      imageUrl={item.imageUrl}
+      onClickFavorite={()=> console.log('I added bookmarks')}
+      onPlus={(obj)=>onAddToCart(obj)}
+      />
       ))}
       </div>
        </div>
