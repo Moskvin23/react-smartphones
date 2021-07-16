@@ -1,5 +1,5 @@
 
-function CartBasket({ onClose, items= [] }) {
+function CartBasket({ onClose,onRemove, items= [] }) {
 
     return (
         <div className="cart-basket-shadow">
@@ -16,7 +16,7 @@ function CartBasket({ onClose, items= [] }) {
       <p className="mb-5">{obj.title}</p>
         <b>{obj.price} грн.</b>
       </div>
-      <img className="removeBtn" src="/img/remove-btn.svg" alt="Remove"/>
+      <img onClick={()=> onRemove(obj.id)} className="removeBtn" src="/img/remove-btn.svg" alt="Remove"/>
       </div>)
       }
       </div>
